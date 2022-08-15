@@ -1,10 +1,12 @@
-import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { Typography } from "@mui/material";
 
 export default function Customer() {
   return (
     <Box>
-      <Typography gutterBottom>Customers</Typography>
+      <Typography variant="h3" align="center" gutterBottom>
+        Customers
+      </Typography>
     </Box>
   );
 }

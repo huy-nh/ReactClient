@@ -1,16 +1,16 @@
-import React from "react";
-import "./App.css";
-import Admin from "./app/component/admin";
-import Customer from "./app/component/customer";
+import Admin from "./app/component/Admin";
+import { AuthProvinder } from "./app/providers/AuthProvinder";
+import { Container } from "@mui/system";
+import Customer from "./app/component/Customer";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Customer />
+    <Container fixed>
+      <AuthProvinder>
         <Admin />
-      </header>
-    </div>
+        <Customer />
+      </AuthProvinder>
+    </Container>
   );
 }
 
