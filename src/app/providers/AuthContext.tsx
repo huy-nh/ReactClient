@@ -22,15 +22,16 @@ const AuthContext = React.createContext<IAuthContext>(defaultContext);
 
 const AuthProvinder = ({ children }: any) => {
   const [id, setId] = useState<string>("");
+  const [name, setName] = useState<string>("");
 
   const authContext: IAuthContext = {
     id,
-    name: "",
+    name: name,
     code: "",
     roles: [],
     onLogin: () => {
       setId("123");
-      console.log(123);
+      setName("H.Huy");
     },
     onLogOut: () => {
       setId("");
