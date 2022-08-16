@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 
-export interface IAuthContext {
+interface IAuthContext {
   id: string;
   name: string;
   code: string;
   roles: string[];
+  onLogin: () => void;
+  onLogOut: () => void;
 }
 
-export const defaultContext: IAuthContext = {
+const defaultContext: IAuthContext = {
   id: "",
   name: "",
   code: "",
   roles: [],
+  onLogin: () => {},
+  onLogOut: () => {},
 };
 
-export const AuthContext = React.createContext<IAuthContext>(defaultContext);
+const AuthContext = React.createContext<IAuthContext>(defaultContext);
+
+const AuthProvinder = ({ children }: any) => {
+  const [id, setId] = useState<string>("");
+
+  const authContext: IAuthContext = {
+    id,
+    name: "",
+    code: "",
+    roles: [],
+    onLogin: () => {
+      setId("123");
+      console.log(123);
+    },
+    onLogOut: () => {
+      setId("");
+    },
+  };
+
+  return (
+    <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>
+  );
+};
+
+export { AuthContext, AuthProvinder };
