@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 
-import { AuthContext } from "app/providers/AuthContext";
+import { AuthContext } from "providers/AuthContext";
 import { Box } from "@mui/system";
 
 export default function Login() {
@@ -12,7 +12,7 @@ export default function Login() {
       <Typography variant="h3" align="center" gutterBottom>
         <AuthContext.Consumer>
           {(authContext) => (
-            <Button variant="contained" onClick={authContext.onLogin}>
+            <Button variant="contained" onClick={authContext.onSignIn}>
               Login
             </Button>
           )}
