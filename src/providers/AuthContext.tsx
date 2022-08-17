@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
 
-import Login from "pages/login/Login";
 import StorageManager from "utils/StorageManager";
+import { useNavigate } from "react-router-dom";
 
 interface IAuthContext {
   id: string;
@@ -37,7 +36,7 @@ const AuthProvinder = ({ children }: any) => {
   const [code, setCode] = useState<string>(
     StorageManager.get("AuthContext:value")?.code
   );
-  const [roles, setRoles] = useState<[]>(
+  const [roles, setRoles] = useState<string[]>(
     StorageManager.get("AuthContext:value")?.roles
   );
 
@@ -46,6 +45,10 @@ const AuthProvinder = ({ children }: any) => {
   const onSignIn = () => {
     setId("123");
     setName("H.Huy");
+    setCode("A51EBCE7-D1C9-4D22-B144-495D3DEB66B0");
+
+    setRoles(["Apple", "Orange", "Banana"]);
+
     StorageManager.update("AuthContext:value", { id: "123", name: "H.Huy" });
     localStorage.setItem(
       "AuthContext:value",
