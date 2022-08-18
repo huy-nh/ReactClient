@@ -8,7 +8,7 @@ interface IAuthContext {
   name: string;
   code: string;
   roles: string[];
-  onSignIn: () => void;
+  onSignIn: (arg0: string, arg1: string) => void;
   onSignOut: () => void;
 }
 
@@ -24,47 +24,41 @@ const defaultContext: IAuthContext = {
 const AuthContext = React.createContext<IAuthContext>(defaultContext);
 
 const AuthProvinder = ({ children }: any) => {
-  console.log("AuthContext:value", StorageManager.get("AuthContext:value"));
+  const navigate = useNavigate();
 
   const [id, setId] = useState<string>(
-    StorageManager.get("AuthContext:value")?.id
+    StorageManager.get(StorageManager.AuthContextKey)?.id
   );
   const [name, setName] = useState<string>(
-    StorageManager.get("AuthContext:value")?.name
+    StorageManager.get(StorageManager.AuthContextKey)?.name
   );
 
   const [code, setCode] = useState<string>(
-    StorageManager.get("AuthContext:value")?.code
+    StorageManager.get(StorageManager.AuthContextKey)?.code
   );
   const [roles, setRoles] = useState<string[]>(
-    StorageManager.get("AuthContext:value")?.roles
+    StorageManager.get(StorageManager.AuthContextKey)?.roles
   );
 
-  const navigate = useNavigate();
-
-  const onSignIn = () => {
-    setId("123");
-    setName("H.Huy");
+  const onSignIn = (id: string, name: string) => {
+    setId(id);
+    setName(name);
     setCode("A51EBCE7-D1C9-4D22-B144-495D3DEB66B0");
-
     setRoles(["Apple", "Orange", "Banana"]);
 
-    StorageManager.update("AuthContext:value", { id: "123", name: "H.Huy" });
-    localStorage.setItem(
-      "AuthContext:value",
-      JSON.stringify({ id: "123", name: "H.Huy" })
-    );
-    console.log("AuthContext:value", StorageManager.get("AuthContext:value"));
-    localStorage.getItem("AuthContext:value");
+    StorageManager.update(StorageManager.AuthContextKey, {
+      id,
+      name,
+    });
+
     navigate("/", { replace: true });
   };
 
   const onSignOut = () => {
     setId("");
     setName("");
-    StorageManager.update("AuthContext:value", null);
+    StorageManager.update(StorageManager.AuthContextKey, null);
 
-    console.log("AuthContext:value", StorageManager.get("AuthContext:value"));
     navigate("/login", { replace: true });
   };
 

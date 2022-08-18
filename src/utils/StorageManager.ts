@@ -1,4 +1,6 @@
 export default class StorageManager {
+  static AuthContextKey: string = 'AuthContext';
+
   static getOrAdd(key: string, data?: any) {
     const cachedData = localStorage.getItem(key);
 
