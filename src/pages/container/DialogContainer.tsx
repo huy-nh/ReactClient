@@ -31,13 +31,13 @@ class DialogContainer extends React.Component {
     const { dialogs } = this.state;
 
     return (
-      <>
+      <React.Fragment>
         {dialogs.map((dialog: IDialog) => {
           const DialogComponent = dialog.component;
 
           return <DialogComponent key={dialog.id} {...dialog.props} />;
         })}
-      </>
+      </React.Fragment>
     );
   }
 }

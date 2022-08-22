@@ -45,7 +45,7 @@ export default function Home() {
       <Button
         variant="outlined"
         onClick={() => {
-          DialogManager.show(<>123123</>, {});
+          DialogManager.show(Contentx, {});
         }}
       >
         Open dialog
@@ -130,6 +130,37 @@ export function CustomizedDialogs() {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
+            Save changes
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+}
+
+export function Contentx({ onDialogClose }: any) {
+  return (
+    <>
+      <Dialog
+        onClose={onDialogClose}
+        aria-labelledby="customized-dialog-title"
+        open
+      >
+        <BootstrapDialogTitle
+          id="customized-dialog-title"
+          onClose={onDialogClose}
+        >
+          Modal title
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
+            cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
+            dui. Donec ullamcorper nulla non metus auctor fringilla.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={onDialogClose}>
             Save changes
           </Button>
         </DialogActions>
