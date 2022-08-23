@@ -4,72 +4,46 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Divider,
   IconButton,
+  Stack,
   Typography,
 } from "@mui/material";
-import { Link, Outlet } from "react-router-dom";
 
-import { AuthContext } from "providers/AuthContext";
 import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
 import DialogManager from "pages/container/DialogManager";
-import { useState } from "react";
 import SaveIcon from "@mui/icons-material/Save";
 
 export default function Home() {
   return (
     <Box textAlign="right">
-      <AuthContext.Consumer>
-        {(authContext) =>
-          authContext.id ? (
-            <>
-              <Box component="span">Welcome {authContext.name + " "}</Box>
-              <Button
-                variant="contained"
-                disabled={authContext.id === ""}
-                onClick={async () => {
-                  var result = await DialogManager.show(ConfirmDialog, {
-                    title: "Title",
-                    content: "Content",
-                  });
-                  if (result) {
-                    authContext.onSignOut();
-                  }
-                }}
-              >
-                Logout
-              </Button>
-              <Outlet />
-            </>
-          ) : (
-            <></>
-          )
-        }
-      </AuthContext.Consumer>
-      <Typography align="left" gutterBottom>
-        <Link to="/">Home</Link> | <Link to="/customers">Customers</Link> |{" "}
-        <Link to="/settings">Setting</Link> | <Link to="/admin">Admin</Link>
-      </Typography>
       <Box textAlign="center">
-        <Button
-          variant="contained"
-          onClick={() => {
-            DialogManager.show(ExampleDialog, {});
-          }}
+        <Stack
+          direction="row"
+          spacing={1}
+          divider={<Divider orientation="vertical" flexItem />}
         >
-          ExampleDialog
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => {
-            DialogManager.show(ConfirmDialog, {
-              title: "Title",
-              content: "Content",
-            });
-          }}
-        >
-          ConfirmDialog
-        </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              DialogManager.show(ExampleDialog, {});
+            }}
+          >
+            Example
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              DialogManager.show(ConfirmDialog, {
+                title: "Title",
+                content: "Content",
+              });
+            }}
+          >
+            Confirm
+          </Button>
+        </Stack>
       </Box>
     </Box>
   );
