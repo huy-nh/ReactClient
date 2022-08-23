@@ -15,6 +15,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import DialogManager from "pages/container/DialogManager";
+import { ConfirmDialog } from "pages/container/ConfirmDialog";
 
 const MenuBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -48,6 +50,17 @@ const MenuBar = () => {
     { text: "Blog", onClick: () => {} },
   ];
 
+  const settingLogout = () => {
+    var result = DialogManager.show(ConfirmDialog, {
+      title: "Do you want to exit the application?",
+      content: "Do you want to exit the application?",
+    }).then(x =>{
+      if(x){
+        authContext.onSignOut();
+      }
+    });
+  }
+
   const settings = [
     { text: "Profile", onClick: handleCloseUserMenu },
     { text: "Account", onClick: handleCloseUserMenu },
@@ -62,7 +75,7 @@ const MenuBar = () => {
     },
     {
       text: "Logout",
-      onClick: authContext.onSignOut,
+      onClick: settingLogout,
     },
   ];
 

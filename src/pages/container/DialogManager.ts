@@ -2,12 +2,12 @@ import EventBus from "./EventBus";
 import { v4 as uniqueId } from "uuid";
 
 export default class DialogManager {
-  static show(component, props) {
+  static show(component: any, props: any) {
     return new Promise((resolve) => {
       const id = uniqueId();
       const newProps = { ...(props || {}) };
 
-      newProps.onDialogClose = (result) => {
+      newProps.onDialogClose = (result: any) => {
         EventBus.publish("dialog.close", id);
 
         resolve(result);
