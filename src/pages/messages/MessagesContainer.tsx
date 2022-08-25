@@ -1,4 +1,4 @@
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Slide, Snackbar } from "@mui/material";
 
 import EventBus from "pages/container/EventBus";
 import React from "react";
@@ -39,26 +39,29 @@ class MessagesContainer extends React.Component<IProps, IState> {
 
   render() {
     const { messages } = this.state;
-
+console.log(messages)
     return (
       <>
         {messages &&
           messages.length > 0 &&
           messages.map((message: any, index: any) => (
             <Snackbar
-              key={message.id}
               open
-              autoHideDuration={3000}
-              onClose={(event, reason) => this.handleClose(message.id, reason)}
+              key={message.id}
+              autoHideDuration={4500}
+              style={{ width: 300, marginTop: index * 60 + 48 }}
+              onClose={(_, reason) => this.handleClose(message.id, reason)}
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              TransitionComponent={Slide}
             >
               <Alert
                 variant="filled"
+                severity={message.type}
                 onClose={() => this.handleClose(message.id)}
-                severity={message?.type || "info"}
-                style={{ marginTop: index * 60 }}
+                style={{ width: 300}}
+                icon={false}
               >
-                {message?.message}
+                {message.message}
               </Alert>
             </Snackbar>
           ))}

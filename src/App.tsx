@@ -7,6 +7,7 @@ import Login from "pages/shared/Login";
 import Logout from "pages/shared/Logout";
 import Main from "pages/shared/Main";
 import MessagesContainer from "pages/messages/MessagesContainer";
+import Customer from "pages/features/Customer";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route element={<Main />}>
             <Route index element={<Home />} />
             <Route path="dashboard" element={<Home />} />
-            <Route path="customers" element={<Home />} />
+            <Route path="customers" element={<Customer />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

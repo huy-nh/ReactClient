@@ -19,7 +19,7 @@ import MessageManager from "pages/messages/MessageManager";
 import { PageHeader } from "pages/shared/PageHeader";
 import { withMessage } from "pages/messages/withMessage";
 
-function Home({ showInfo }) {
+function Home() {
   return (
     <Paper
       elevation={3}
@@ -33,12 +33,21 @@ function Home({ showInfo }) {
       <Button
         variant="contained"
         onClick={() => {
-          showInfo("123");
           MessageManager.show("123");
         }}
       >
         Message
       </Button>
+
+      <Button
+        variant="contained"
+        onClick={() => {
+          MessageManager.show("Lập Trình Sư nói: “Khi ngươi biết cách lấy mã lỗi từ đoạn code bắt lỗi, ngươi có thể xuống núi.”", 'success');
+        }}
+      >
+        Message
+      </Button>
+
       <Button
         variant="contained"
         onClick={() => {
@@ -62,7 +71,7 @@ function Home({ showInfo }) {
   );
 }
 
-export default withMessage(Home);
+export default Home;
 
 export function ExampleDialog({ onDialogClose }: any) {
   return (
