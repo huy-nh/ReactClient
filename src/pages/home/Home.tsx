@@ -13,44 +13,56 @@ import {
 
 import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
-import DialogManager from "pages/container/DialogManager";
 import { ConfirmDialog } from "pages/container/ConfirmDialog";
+import DialogManager from "pages/container/DialogManager";
+import MessageManager from "pages/messages/MessageManager";
+import { PageHeader } from "pages/shared/PageHeader";
+import { withMessage } from "pages/messages/withMessage";
 
-export default function Home() {
+function Home({ showInfo }) {
   return (
-    <Paper elevation={3} sx={{p: 3}}>
-      <Box >
-        <Box textAlign="center">
-          <Stack
-            direction="row"
-            spacing={1}
-            divider={<Divider orientation="vertical" flexItem />}
-          >
-            <Button
-              variant="contained"
-              onClick={() => {
-                DialogManager.show(ExampleDialog, {});
-              }}
-            >
-              Example
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => {
-                DialogManager.show(ConfirmDialog, {
-                  title: "Title",
-                  content: "Content",
-                });
-              }}
-            >
-              Confirm
-            </Button>
-          </Stack>
-        </Box>
-      </Box>
+    <Paper
+      elevation={3}
+      sx={{ p: 3 }}
+      style={{ display: "flex", height: "100%" }}
+    >
+      <PageHeader
+        title="Home"
+        subTitle="Lập Trình Sư nói: “Khi ngươi biết cách lấy mã lỗi từ đoạn code bắt lỗi, ngươi có thể xuống núi.”"
+      />
+      <Button
+        variant="contained"
+        onClick={() => {
+          showInfo("123");
+          MessageManager.show("123");
+        }}
+      >
+        Message
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          DialogManager.show(ExampleDialog, {});
+        }}
+      >
+        Example
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          DialogManager.show(ConfirmDialog, {
+            title: "Title",
+            content: "Content",
+          });
+        }}
+      >
+        Confirm
+      </Button>
     </Paper>
   );
 }
+
+export default withMessage(Home);
 
 export function ExampleDialog({ onDialogClose }: any) {
   return (

@@ -6,7 +6,9 @@ import { AuthContext } from "providers/AuthContext";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { ConfirmDialog } from "pages/container/ConfirmDialog";
 import Container from "@mui/material/Container";
+import DialogManager from "pages/container/DialogManager";
 import { Divider } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -15,8 +17,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import DialogManager from "pages/container/DialogManager";
-import { ConfirmDialog } from "pages/container/ConfirmDialog";
 
 const MenuBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -54,12 +54,14 @@ const MenuBar = () => {
     var result = DialogManager.show(ConfirmDialog, {
       title: "Do you want to exit the application?",
       content: "Do you want to exit the application?",
-    }).then(x =>{
-      if(x){
+    }).then((x) => {
+      if (x) {
         authContext.onSignOut();
       }
     });
-  }
+
+    setAnchorElUser(null);
+  };
 
   const settings = [
     { text: "Profile", onClick: handleCloseUserMenu },
