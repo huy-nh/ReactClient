@@ -1,6 +1,6 @@
 import { Button, FormControl, TextField, Typography } from "@mui/material";
 
-import { AuthContext } from "providers/AuthContext";
+import { AuthContext } from "features/providers/AuthContext";
 import { Box } from "@mui/system";
 import { useState } from "react";
 

@@ -4,20 +4,16 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Divider,
   IconButton,
   Paper,
-  Stack,
   Typography,
 } from "@mui/material";
 
-import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
-import { ConfirmDialog } from "pages/container/ConfirmDialog";
-import DialogManager from "pages/container/DialogManager";
-import MessageManager from "pages/messages/MessageManager";
+import { ConfirmDialog } from "features/container/ConfirmDialog";
+import DialogManager from "features/container/DialogManager";
+import MessageManager from "features/messages/MessageManager";
 import { PageHeader } from "pages/shared/PageHeader";
-import { withMessage } from "pages/messages/withMessage";
 
 function Home() {
   return (
@@ -42,7 +38,10 @@ function Home() {
       <Button
         variant="contained"
         onClick={() => {
-          MessageManager.show("Lập Trình Sư nói: “Khi ngươi biết cách lấy mã lỗi từ đoạn code bắt lỗi, ngươi có thể xuống núi.”", 'success');
+          MessageManager.show(
+            "Lập Trình Sư nói: “Khi ngươi biết cách lấy mã lỗi từ đoạn code bắt lỗi, ngươi có thể xuống núi.”",
+            "success"
+          );
         }}
       >
         Message

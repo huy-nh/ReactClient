@@ -2,13 +2,13 @@ import * as React from "react";
 
 import AdbIcon from "@mui/icons-material/Adb";
 import AppBar from "@mui/material/AppBar";
-import { AuthContext } from "providers/AuthContext";
+import { AuthContext } from "features/providers/AuthContext";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { ConfirmDialog } from "pages/container/ConfirmDialog";
+import { ConfirmDialog } from "features/container/ConfirmDialog";
 import Container from "@mui/material/Container";
-import DialogManager from "pages/container/DialogManager";
+import DialogManager from "features/container/DialogManager";
 import { Divider } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -55,9 +55,7 @@ const MenuBar = () => {
       title: "Do you want to exit the application?",
       content: "Do you want to exit the application?",
     }).then((x) => {
-      if (x) {
-        authContext.onSignOut();
-      }
+      authContext.onSignOut();
     });
 
     setAnchorElUser(null);

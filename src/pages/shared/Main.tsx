@@ -1,32 +1,46 @@
-import { Box, Container } from "@mui/material";
-import { Navigate, Outlet } from "react-router-dom";
+import * as React from "react";
 
-import AppBreadcrumbs from "./Breadcrumbs";
-import { AuthContext } from "providers/AuthContext";
-import MenuBar from "./MenuBar";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Drawer from "@mui/material/Drawer";
+import { Outlet } from "react-router-dom";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 
-function Main() {
+export default function Main({ element }) {
+  const drawerWidth = 240;
   return (
-    <AuthContext.Consumer>
-      {(authContext) =>
-        authContext.id ? (
-          <>
-            <>
-              <MenuBar />
-            </>
-            <>
-              <Container fixed>
-                <AppBreadcrumbs />
-                <Outlet />
-              </Container>
-            </>
-          </>
-        ) : (
-          <Navigate to="/login" replace />
-        )
-      }
-    </AuthContext.Consumer>
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
+        <Toolbar>
+          <Typography variant="h6" noWrap component="div">
+            Casino
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
+            width: drawerWidth,
+            boxSizing: "border-box",
+          },
+        }}
+      >
+        <Toolbar />
+        <Box sx={{ overflow: "auto" }}>{element}</Box>
+      </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        <Outlet />
+      </Box>
+    </Box>
   );
 }
-
-export default Main;

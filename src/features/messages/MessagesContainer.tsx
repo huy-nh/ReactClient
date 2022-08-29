@@ -1,6 +1,6 @@
 import { Alert, Slide, Snackbar } from "@mui/material";
 
-import EventBus from "pages/container/EventBus";
+import EventBus from "features/container/EventBus";
 import React from "react";
 import { v4 as uniqueId } from "uuid";
 
@@ -39,7 +39,7 @@ class MessagesContainer extends React.Component<IProps, IState> {
 
   render() {
     const { messages } = this.state;
-console.log(messages)
+
     return (
       <>
         {messages &&
@@ -48,7 +48,7 @@ console.log(messages)
             <Snackbar
               open
               key={message.id}
-              autoHideDuration={4500}
+              autoHideDuration={3000}
               style={{ width: 300, marginTop: index * 60 + 48 }}
               onClose={(_, reason) => this.handleClose(message.id, reason)}
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -58,7 +58,7 @@ console.log(messages)
                 variant="filled"
                 severity={message.type}
                 onClose={() => this.handleClose(message.id)}
-                style={{ width: 300}}
+                style={{ width: 300 }}
                 icon={false}
               >
                 {message.message}

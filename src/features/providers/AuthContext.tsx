@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import StorageManager from "utils/StorageManager";
+import StorageManager from "features/utils/StorageManager";
 import { useNavigate } from "react-router-dom";
 
 interface IAuthContext {
