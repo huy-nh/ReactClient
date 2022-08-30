@@ -1,7 +1,16 @@
 import {
   Box,
+  Checkbox,
   Container,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  FormLabel,
+  Input,
+  InputLabel,
   Paper,
+  Select,
   Stack,
   TextField,
   Typography,
@@ -9,8 +18,11 @@ import {
 import { useEffect, useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
+import { CheckBoxOutlined } from "@mui/icons-material";
+import MenuItem from "@mui/material/MenuItem";
 import MessageManager from "features/messages/MessageManager";
 import { PageHeader } from "pages/shared/PageHeader";
+import { error } from "console";
 
 export default function Settings() {
   const defaultSettings = {
@@ -37,27 +49,26 @@ export default function Settings() {
         handleChange({ key: "number", value: e.target.value });
       },
     },
-    string2: {
-      key: "string2",
-      value: "",
-      type: "string",
-      label: "String",
+    select: {
+      key: "select",
+      select: true,
+      value: 10,
+      type: "select",
+      label: "Select",
       fullWidth: true,
+      children: [
+        <MenuItem key={10} value={10}>
+          10.
+        </MenuItem>,
+        <MenuItem key={20} value={20}>
+          20.
+        </MenuItem>,
+        <MenuItem key={30} value={30}>
+          30.
+        </MenuItem>,
+      ],
       onChange: (e) => {
-        handleChange({ key: "string", value: e.target.value });
-      },
-    },
-    number2: {
-      key: "number2",
-      value: 0,
-      type: "number",
-      label: "Number2",
-      fullWidth: true,
-      InputLabelProps: {
-        shrink: true,
-      },
-      onChange: (e) => {
-        handleChange({ key: "number", value: e.target.value });
+        handleChange({ key: "select", value: e.target.value });
       },
     },
   };
@@ -119,8 +130,7 @@ export default function Settings() {
               variant: "outlined",
               disabled: !dataChanged.some((x) => x),
               onClick() {
-                MessageManager.show("button clicked");
-                handleChange({ key: "string", value: "btn" });
+                setTextFieldsProps(textFieldsPropsCapture);
               },
               // startIcon: <AddIcon />,
               children: "Cancel",
@@ -131,10 +141,43 @@ export default function Settings() {
           <TextField
             {...textFieldsProps[textFieldProps]}
             onChange={(e) => {
-              handleChange({ key: textFieldProps, value: e.target.value });
+              handleChange({
+                key: textFieldProps,
+                value: e.target.value,
+              });
             }}
           />
         ))}
+
+        <FormControl fullWidth>
+          <FormLabel>Pick two</FormLabel>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox name="gilad" />}
+              label="Gilad Gray"
+            />
+            <FormControlLabel
+              control={<Checkbox name="gilad" />}
+              label="Jason Killian"
+            />
+            <FormControlLabel
+              control={<Checkbox name="antoine" />}
+              label="Antoine Llorca"
+            />
+          </FormGroup>
+          {/* <FormHelperText>You can display an error</FormHelperText> */}
+        </FormControl>
+
+        <FormControl fullWidth>
+          <FormLabel>Text</FormLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" />
+          {/* <FormHelperText>You can display an error</FormHelperText> */}
+        </FormControl>
+
+        <FormControl fullWidth>
+          <FormLabel>Text</FormLabel>
+          <TextField variant="filled" />
+        </FormControl>
       </Stack>
     </Paper>
   );
