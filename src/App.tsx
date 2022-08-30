@@ -1,4 +1,4 @@
-import DefaultMenu, {
+import LeftMenu, {
   AdminRouteConfig,
   DefaultRouteConfig,
 } from "pages/shared/DefaultMenu";
@@ -20,19 +20,13 @@ function App() {
         <Route path="logout" element={<Logout />} />
         <Route
           path=""
-          element={
-            <Main
-              element={<DefaultMenu configuration={DefaultRouteConfig} />}
-            />
-          }
+          element={<Main element={<LeftMenu type="user" />} />}
           children={DefaultRouteConfig.map(routeFn)}
         />
         <Route
           path="admin"
-          element={
-            <Main element={<DefaultMenu configuration={AdminRouteConfig} />} />
-          }
-          children={DefaultRouteConfig.map(routeFn)}
+          element={<Main element={<LeftMenu type="admin" />} />}
+          children={AdminRouteConfig.map(routeFn)}
         />
       </Routes>
       <DialogContainer />

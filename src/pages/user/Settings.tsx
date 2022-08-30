@@ -99,7 +99,7 @@ export default function Settings() {
         spacing={4}
       >
         <PageHeader
-          title="Users"
+          title="Settings"
           buttons={[
             {
               key: "btnSave",
@@ -128,19 +128,12 @@ export default function Settings() {
           ]}
         />
         {Object.keys(textFieldsProps).map((textFieldProps) => (
-          {
-            witch(textFieldProps.type)
-            {
-              case 'string':
-                return <TextField
-                  {...textFieldsProps[textFieldProps]}
-                  onChange={(e) => {
-                    handleChange({ key: textFieldProps, value: e.target.value });
-                  }
-                }/>
-          }
-          }
-          
+          <TextField
+            {...textFieldsProps[textFieldProps]}
+            onChange={(e) => {
+              handleChange({ key: textFieldProps, value: e.target.value });
+            }}
+          />
         ))}
       </Stack>
     </Paper>

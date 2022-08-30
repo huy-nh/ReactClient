@@ -1,6 +1,7 @@
 import { Paper, Tab, Tabs, Typography } from "@mui/material";
 
 import { Box } from "@mui/system";
+import { PageHeader } from "pages/shared/PageHeader";
 import React from "react";
 
 function Customer() {
@@ -11,11 +12,8 @@ function Customer() {
   };
 
   return (
-    <Paper
-      elevation={3}
-      sx={{ p: 3 }}
-      style={{ display: "flex", height: "100%" }}
-    >
+    <Paper elevation={3} sx={{ p: 3 }}>
+      <PageHeader title="Customers" />
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
@@ -30,9 +28,7 @@ function Customer() {
         </Box>
         <TabPanel value={value} index={0}></TabPanel>
         <TabPanel value={value} index={1}></TabPanel>
-        <TabPanel value={value} index={2}>
-          Item Three
-        </TabPanel>
+        <TabPanel value={value} index={2}></TabPanel>
       </Box>
     </Paper>
   );

@@ -8,10 +8,17 @@ import {
 } from "@mui/material";
 import { Link, NavLink, Navigate } from "react-router-dom";
 
+import AdminHome from "pages/admin/AdminHome";
 import CircleIcon from "@mui/icons-material/Circle";
 import Customer from "pages/user/Customer";
+import GroupIcon from "@mui/icons-material/Group";
 import Home from "pages/user/Home";
-import Setting from "pages/admin/Setting";
+import HomeIcon from "@mui/icons-material/Home";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import PageNotFound from "./PageNotFound";
+import Settings from "pages/user/Settings";
+import SettingsIcon from "@mui/icons-material/Settings";
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import User from "pages/user/User";
 
 export const DefaultRouteConfig = [
@@ -20,32 +27,32 @@ export const DefaultRouteConfig = [
     index: true,
     path: "",
     element: <Home />,
-    text: "Dashboard",
-    icon: <CircleIcon color="primary" />,
+    text: "Home",
+    icon: <HomeIcon />,
+    divider: true,
+    role: ["Admin", "User"],
   },
   {
-    key: "customers",
-    path: "customers",
-    element: <Customer />,
-    text: "Customers",
-    icon: <CircleIcon color="primary" />,
-  },
-  {
-    key: "users",
-    path: "users",
-    element: <User />,
-    text: "Users",
-    icon: <CircleIcon color="primary" />,
+    key: "settings",
+    path: "settings",
+    element: <Settings />,
+    text: "Settings",
+    icon: <SettingsIcon />,
     divider: true,
   },
   {
-    key: "*",
+    key: "page-not-found",
+    path: "page-not-found",
+    element: <PageNotFound />,
+  },
+  {
+    key: "admin",
     path: "admin",
     element: <Navigate to="admin" replace />,
-    text: "To Admin",
-    icon: <CircleIcon color="error" />,
+    text: "Switch",
+    icon: <SwapHorizIcon />,
+    role: ["Admin", "User"],
   },
-  { path: "*", element: <Navigate to="" replace /> },
 ];
 
 export const AdminRouteConfig = [
@@ -53,44 +60,47 @@ export const AdminRouteConfig = [
     key: "index",
     index: true,
     path: "",
-    element: <Home />,
-    text: "Dashboard",
-    icon: <CircleIcon color="error" />,
+    element: <AdminHome />,
+    text: "Home",
+    icon: <HomeIcon />,
+    divider: true,
+    role: ["Admin", "User"],
   },
   {
     key: "customers",
     path: "customers",
     element: <Customer />,
     text: "Customers",
-    icon: <CircleIcon color="error" />,
+    icon: <GroupIcon />,
+    role: ["Admin", "User"],
   },
   {
     key: "users",
     path: "users",
     element: <User />,
     text: "Users",
-    icon: <CircleIcon color="error" />,
+    icon: <GroupIcon />,
     divider: true,
+    role: ["Admin", "User"],
   },
-  {
-    key: "settings",
-    path: "settings",
-    element: <Setting />,
-    text: "Settings",
-    icon: <CircleIcon color="error" />,
-    divider: true,
-  },
+
   {
     key: "user",
-    path: "/",
+    path: "user",
     element: <Navigate to="/" replace />,
-    text: "To User",
-    icon: <CircleIcon color="primary" />,
+    text: "Switch",
+    icon: <SwapHorizIcon />,
   },
-  { key: "*", path: "*", element: <Navigate to="" replace /> },
 ];
 
-export default function DefaultMenu({ configuration }) {
+export default function LeftMenu({ type }: { type: "user" | "admin" }) {
+  const configuration: any =
+    type === "user"
+      ? DefaultRouteConfig
+      : type === "admin"
+      ? AdminRouteConfig
+      : [];
+
   return (
     <>
       <List>

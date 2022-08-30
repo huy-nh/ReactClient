@@ -20,13 +20,13 @@ function Home() {
     <Paper
       elevation={3}
       sx={{ p: 3 }}
-      style={{ display: "flex", height: "100%" }}
+      // style={{ display: "flex", height: "100%" }}
     >
       <PageHeader
         title="Home"
-        subTitle="Lập Trình Sư nói: “Khi ngươi biết cách lấy mã lỗi từ đoạn code bắt lỗi, ngươi có thể xuống núi.”"
+        // subTitle="Lập Trình Sư nói: “Khi ngươi biết cách lấy mã lỗi từ đoạn code bắt lỗi, ngươi có thể xuống núi.”"
       />
-      <Button
+      {/* <Button
         variant="contained"
         onClick={() => {
           MessageManager.show("123");
@@ -65,7 +65,7 @@ function Home() {
         }}
       >
         Confirm
-      </Button>
+      </Button> */}
     </Paper>
   );
 }
