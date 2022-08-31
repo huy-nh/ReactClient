@@ -1,6 +1,7 @@
-import LeftMenu, {
+import {
   AdminRouteConfig,
   DefaultRouteConfig,
+  LeftMenu,
 } from "pages/shared/DefaultMenu";
 import { Route, Routes } from "react-router-dom";
 

@@ -6,7 +6,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { Link, NavLink, Navigate } from "react-router-dom";
+import { Link, NavLink, Navigate, Route } from "react-router-dom";
 
 import AdminHome from "pages/admin/AdminHome";
 import CircleIcon from "@mui/icons-material/Circle";
@@ -93,7 +93,7 @@ export const AdminRouteConfig = [
   },
 ];
 
-export default function LeftMenu({ type }: { type: "user" | "admin" }) {
+export function LeftMenu({ type }: { type: "user" | "admin" }) {
   const configuration: any =
     type === "user"
       ? DefaultRouteConfig
@@ -131,4 +131,10 @@ export default function LeftMenu({ type }: { type: "user" | "admin" }) {
       </List>
     </>
   );
+}
+
+export function AdminRoute() {
+  const routeFn = (x) => <Route {...x} />;
+
+  return DefaultRouteConfig.map(routeFn);
 }
