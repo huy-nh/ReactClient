@@ -1,8 +1,4 @@
-import {
-  AdminRouteConfig,
-  DefaultRouteConfig,
-  LeftMenu,
-} from "pages/shared/DefaultMenu";
+import { Menu, Routing } from "pages/shared/Menu";
 import { Route, Routes } from "react-router-dom";
 
 import { AuthProvinder } from "features/providers/AuthContext";
@@ -11,9 +7,9 @@ import Login from "pages/shared/Login";
 import Logout from "pages/shared/Logout";
 import Main from "pages/shared/Main";
 import MessagesContainer from "features/messages/MessagesContainer";
+import PageNotFound from "pages/shared/PageNotFound";
 
 function App() {
-  const routeFn = (x) => <Route {...x} />;
   return (
     <AuthProvinder>
       <Routes>
@@ -21,14 +17,15 @@ function App() {
         <Route path="logout" element={<Logout />} />
         <Route
           path=""
-          element={<Main element={<LeftMenu type="user" />} />}
-          children={DefaultRouteConfig.map(routeFn)}
+          element={<Main element={<Menu type="user" />} />}
+          children={Routing({ type: "user" })}
         />
         <Route
           path="admin"
-          element={<Main element={<LeftMenu type="admin" />} />}
-          children={AdminRouteConfig.map(routeFn)}
+          element={<Main element={<Menu type="admin" />} />}
+          children={Routing({ type: "admin" })}
         />
+        <Route path="page-not-found" element={<PageNotFound />} />
       </Routes>
       <DialogContainer />
       <MessagesContainer />

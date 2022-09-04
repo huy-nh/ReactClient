@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Checkbox,
   Container,
@@ -19,6 +20,7 @@ import { useEffect, useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
 import { CheckBoxOutlined } from "@mui/icons-material";
+import Drawer from "pages/shared/Drawer";
 import MenuItem from "@mui/material/MenuItem";
 import MessageManager from "features/messages/MessageManager";
 import { PageHeader } from "pages/shared/PageHeader";
@@ -117,13 +119,10 @@ export default function Settings() {
               variant: "contained",
               disabled: !dataChanged.some((x) => x),
               onClick() {
-                MessageManager.show("button clicked");
+                MessageManager.show("Save Changes");
               },
               // startIcon: <AddIcon />,
-              children:
-                dataChanged.length > 0
-                  ? `Save Changes (${dataChanged.length})`
-                  : "Save Changes",
+              children: "Save Changes",
             },
             {
               key: "btnCancel",
@@ -178,6 +177,8 @@ export default function Settings() {
           <FormLabel>Text</FormLabel>
           <TextField variant="filled" />
         </FormControl>
+
+        <Drawer />
       </Stack>
     </Paper>
   );

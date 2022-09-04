@@ -21,7 +21,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import User from "pages/user/User";
 
-export const DefaultRouteConfig = [
+const DefaultRouteConfig: any = [
   {
     key: "index",
     index: true,
@@ -41,11 +41,6 @@ export const DefaultRouteConfig = [
     divider: true,
   },
   {
-    key: "page-not-found",
-    path: "page-not-found",
-    element: <PageNotFound />,
-  },
-  {
     key: "admin",
     path: "admin",
     element: <Navigate to="admin" replace />,
@@ -55,7 +50,7 @@ export const DefaultRouteConfig = [
   },
 ];
 
-export const AdminRouteConfig = [
+const AdminRouteConfig = [
   {
     key: "index",
     index: true,
@@ -93,7 +88,7 @@ export const AdminRouteConfig = [
   },
 ];
 
-export function LeftMenu({ type }: { type: "user" | "admin" }) {
+export function Menu({ type }: { type: "user" | "admin" }) {
   const configuration: any =
     type === "user"
       ? DefaultRouteConfig
@@ -133,8 +128,13 @@ export function LeftMenu({ type }: { type: "user" | "admin" }) {
   );
 }
 
-export function AdminRoute() {
-  const routeFn = (x) => <Route {...x} />;
+const toRoute = (x) => <Route {...x} />;
 
-  return DefaultRouteConfig.map(routeFn);
+export function Routing({ type }: { type: "user" | "admin" }) {
+  switch (type) {
+    case "admin":
+      return AdminRouteConfig.map(toRoute);
+    default:
+      return DefaultRouteConfig.map(toRoute);
+  }
 }
