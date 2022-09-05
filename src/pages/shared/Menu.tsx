@@ -1,21 +1,20 @@
 import {
+  Box,
   Divider,
+  Link,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { Link, NavLink, Navigate, Route } from "react-router-dom";
+import { NavLink, Navigate, Route } from "react-router-dom";
 
 import AdminHome from "pages/admin/AdminHome";
-import CircleIcon from "@mui/icons-material/Circle";
 import Customer from "pages/user/Customer";
 import GroupIcon from "@mui/icons-material/Group";
 import Home from "pages/user/Home";
 import HomeIcon from "@mui/icons-material/Home";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import PageNotFound from "./PageNotFound";
 import Settings from "pages/user/Settings";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
@@ -31,6 +30,7 @@ const DefaultRouteConfig: any = [
     icon: <HomeIcon />,
     divider: true,
     role: ["Admin", "User"],
+    group: "top",
   },
   {
     key: "settings",
@@ -38,7 +38,8 @@ const DefaultRouteConfig: any = [
     element: <Settings />,
     text: "Settings",
     icon: <SettingsIcon />,
-    divider: true,
+    divider: false,
+    group: "bottom",
   },
   {
     key: "admin",
@@ -47,6 +48,7 @@ const DefaultRouteConfig: any = [
     text: "Switch",
     icon: <SwapHorizIcon />,
     role: ["Admin", "User"],
+    group: "bottom",
   },
 ];
 
@@ -60,6 +62,7 @@ const AdminRouteConfig = [
     icon: <HomeIcon />,
     divider: true,
     role: ["Admin", "User"],
+    group: "top",
   },
   {
     key: "customers",
@@ -68,6 +71,7 @@ const AdminRouteConfig = [
     text: "Customers",
     icon: <GroupIcon />,
     role: ["Admin", "User"],
+    group: "top",
   },
   {
     key: "users",
@@ -77,14 +81,15 @@ const AdminRouteConfig = [
     icon: <GroupIcon />,
     divider: true,
     role: ["Admin", "User"],
+    group: "top",
   },
-
   {
     key: "user",
     path: "user",
     element: <Navigate to="/" replace />,
     text: "Switch",
     icon: <SwapHorizIcon />,
+    group: "bottom",
   },
 ];
 
@@ -96,35 +101,59 @@ export function Menu({ type }: { type: "user" | "admin" }) {
       ? AdminRouteConfig
       : [];
 
-  return (
-    <>
+  const RenderList = (configuration) => {
+    return (
       <List>
-        {configuration
-          .filter((x) => x.path !== "*")
-          .map((x) => (
-            <>
-              <ListItem disablePadding>
-                <NavLink
-                  to={x.path}
-                  className={({ isActive }) =>
-                    isActive ? "activeClassName" : undefined
-                  }
-                  style={{ width: "100%" }}
-                >
-                  <ListItemButton>
-                    <ListItemIcon>{x.icon}</ListItemIcon>
-                    <ListItemText
-                      primary={x.text}
-                      style={{ textDecoration: "none !important" }}
-                    />
-                  </ListItemButton>
-                </NavLink>
-              </ListItem>
-              {x.divider && <Divider />}
-            </>
-          ))}
+        {configuration.map((x) => (
+          <>
+            <ListItem button disablePadding>
+              <NavLink
+                to={x.path}
+                style={({ isActive }) =>
+                  isActive
+                    ? {
+                        width: "100%",
+                        textDecoration: "none",
+                        color: "blue",
+                        fontWeight: 900,
+                      }
+                    : {
+                        width: "100%",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }
+                }
+              >
+                <ListItemButton>
+                  <ListItemIcon>{x.icon}</ListItemIcon>
+                  <ListItemText>{x.text}</ListItemText>
+                </ListItemButton>
+              </NavLink>
+            </ListItem>
+            {x.divider && <Divider />}
+          </>
+        ))}
       </List>
-    </>
+    );
+  };
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      <Box sx={{ flexGrow: 1 }}>
+        {RenderList(
+          configuration
+            .filter((x) => x.path !== "*")
+            .filter((x) => x.group === "top")
+        )}
+      </Box>
+      <Box>
+        {RenderList(
+          configuration
+            .filter((x) => x.path !== "*")
+            .filter((x) => x.group === "bottom")
+        )}
+      </Box>
+    </Box>
   );
 }
 

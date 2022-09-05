@@ -35,7 +35,7 @@ export default function Main({ element }) {
         }}
       >
         <Toolbar />
-        <Box sx={{ overflow: "auto" }}>{element}</Box>
+        <Box sx={{ overflow: "auto", height: "100vh" }}>{element}</Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
