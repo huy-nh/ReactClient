@@ -15,6 +15,7 @@ import Customer from "pages/user/Customer";
 import GroupIcon from "@mui/icons-material/Group";
 import Home from "pages/user/Home";
 import HomeIcon from "@mui/icons-material/Home";
+import NestedList from "./NestedMenu";
 import Settings from "pages/user/Settings";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
@@ -103,37 +104,41 @@ export function Menu({ type }: { type: "user" | "admin" }) {
 
   const RenderList = (configuration) => {
     return (
-      <List>
-        {configuration.map((x) => (
-          <>
-            <ListItem button disablePadding>
-              <NavLink
-                to={x.path}
-                style={({ isActive }) =>
-                  isActive
-                    ? {
-                        width: "100%",
-                        textDecoration: "none",
-                        color: "blue",
-                        fontWeight: 900,
-                      }
-                    : {
-                        width: "100%",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }
-                }
-              >
-                <ListItemButton>
-                  <ListItemIcon>{x.icon}</ListItemIcon>
-                  <ListItemText>{x.text}</ListItemText>
-                </ListItemButton>
-              </NavLink>
-            </ListItem>
-            {x.divider && <Divider />}
-          </>
-        ))}
-      </List>
+      <>
+        <List>
+          {configuration.map((x) => (
+            <>
+              <ListItem button disablePadding>
+                <NavLink
+                  to={x.path}
+                  // style={({ isActive }) =>
+                  //   isActive
+                  //     ? {
+                  //         width: "100%",
+                  //         textDecoration: "none",
+                  //         color: "blue",
+                  //         fontWeight: 900,
+                  //       }
+                  //     : {
+                  //         width: "100%",
+                  //         textDecoration: "none",
+                  //         color: "inherit",
+                  //       }
+                  // }
+                >
+                  {({ isActive }) => (
+                    <ListItemButton selected={isActive}>
+                      <ListItemIcon>{x.icon}</ListItemIcon>
+                      <ListItemText>{x.text}</ListItemText>
+                    </ListItemButton>
+                  )}
+                </NavLink>
+              </ListItem>
+              {x.divider && <Divider />}
+            </>
+          ))}
+        </List>
+      </>
     );
   };
 
@@ -145,6 +150,7 @@ export function Menu({ type }: { type: "user" | "admin" }) {
             .filter((x) => x.path !== "*")
             .filter((x) => x.group === "top")
         )}
+        <NestedList />
       </Box>
       <Box>
         {RenderList(

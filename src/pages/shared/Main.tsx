@@ -1,10 +1,11 @@
 import * as React from "react";
 
+import { Link, Outlet } from "react-router-dom";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Drawer from "@mui/material/Drawer";
-import { Outlet } from "react-router-dom";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
@@ -18,9 +19,18 @@ export default function Main({ element }) {
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Casino
-          </Typography>
+          <Link
+            to="/"
+            style={{
+              textDecoration: "none",
+              color: "#d3d3d3",
+              letterSpacing: 3,
+            }}
+          >
+            <Typography variant="h4" style={{ letterSpacing: 18 }}>
+              Casino
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer

@@ -1,30 +1,20 @@
 import {
-  Badge,
-  Box,
   Checkbox,
-  Container,
   FormControl,
   FormControlLabel,
   FormGroup,
-  FormHelperText,
   FormLabel,
   Input,
-  InputLabel,
   Paper,
-  Select,
   Stack,
   TextField,
-  Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import AddIcon from "@mui/icons-material/Add";
-import { CheckBoxOutlined } from "@mui/icons-material";
 import Drawer from "pages/shared/Drawer";
 import MenuItem from "@mui/material/MenuItem";
 import MessageManager from "features/messages/MessageManager";
 import { PageHeader } from "pages/shared/PageHeader";
-import { error } from "console";
 
 export default function Settings() {
   const defaultSettings = {

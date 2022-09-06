@@ -1,5 +1,6 @@
 import EventBus from "features/container/EventBus";
-import { v4 as uniqueId } from "uuid";
+
+// import { v4 as uniqueId } from "uuid";
 
 export default class MessageManager {
   static show = (
