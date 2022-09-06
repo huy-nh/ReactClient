@@ -8,18 +8,18 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { NavLink, Navigate, Route } from "react-router-dom";
+import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 
 import AdminHome from "pages/admin/AdminHome";
-import Customer from "pages/user/Customer";
+import Customer from "pages/admin/Customer";
 import GroupIcon from "@mui/icons-material/Group";
 import Home from "pages/user/Home";
 import HomeIcon from "@mui/icons-material/Home";
 import NestedList from "./NestedMenu";
-import Settings from "pages/user/Settings";
+import Settings from "pages/admin/Settings";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import User from "pages/user/User";
+import User from "pages/admin/User";
 
 const DefaultRouteConfig: any = [
   {
@@ -30,17 +30,57 @@ const DefaultRouteConfig: any = [
     text: "Home",
     icon: <HomeIcon />,
     divider: true,
-    role: ["Admin", "User"],
     group: "top",
   },
   {
-    key: "settings",
-    path: "settings",
-    element: <Settings />,
-    text: "Settings",
-    icon: <SettingsIcon />,
-    divider: false,
-    group: "bottom",
+    key: "quick-access",
+    path: "quick-access",
+    element: "Quick Access",
+    text: "Quick Access",
+    icon: <HomeIcon />,
+    group: "top",
+    items: [
+      {
+        key: "desktop",
+        path: "desktop",
+        element: "Desktop",
+        text: "Desktop",
+        icon: <HomeIcon />,
+        group: "top",
+      },
+    ],
+  },
+  {
+    key: "onedrive-personal",
+    path: "onedrive-personal",
+    element: "OneDrive - Personal",
+    text: "OneDrive - Personal",
+    icon: <HomeIcon />,
+    group: "top",
+  },
+  {
+    key: "this-pc",
+    path: "this-pc",
+    element: "This Pc",
+    text: "This Pc",
+    icon: <HomeIcon />,
+    group: "top",
+  },
+  {
+    key: "network",
+    path: "network",
+    element: "Network",
+    text: "Network",
+    icon: <HomeIcon />,
+    group: "top",
+  },
+  {
+    key: "linux",
+    path: "linux",
+    element: "Linux",
+    text: "Linux",
+    icon: <HomeIcon />,
+    group: "top",
   },
   {
     key: "admin",
@@ -48,7 +88,6 @@ const DefaultRouteConfig: any = [
     element: <Navigate to="admin" replace />,
     text: "Switch",
     icon: <SwapHorizIcon />,
-    role: ["Admin", "User"],
     group: "bottom",
   },
 ];
@@ -62,7 +101,6 @@ const AdminRouteConfig = [
     text: "Home",
     icon: <HomeIcon />,
     divider: true,
-    role: ["Admin", "User"],
     group: "top",
   },
   {
@@ -71,7 +109,6 @@ const AdminRouteConfig = [
     element: <Customer />,
     text: "Customers",
     icon: <GroupIcon />,
-    role: ["Admin", "User"],
     group: "top",
   },
   {
@@ -81,8 +118,16 @@ const AdminRouteConfig = [
     text: "Users",
     icon: <GroupIcon />,
     divider: true,
-    role: ["Admin", "User"],
     group: "top",
+  },
+  {
+    key: "settings",
+    path: "settings",
+    element: <Settings />,
+    text: "Settings",
+    icon: <SettingsIcon />,
+    divider: false,
+    group: "bottom",
   },
   {
     key: "user",
@@ -111,20 +156,10 @@ export function Menu({ type }: { type: "user" | "admin" }) {
               <ListItem button disablePadding>
                 <NavLink
                   to={x.path}
-                  // style={({ isActive }) =>
-                  //   isActive
-                  //     ? {
-                  //         width: "100%",
-                  //         textDecoration: "none",
-                  //         color: "blue",
-                  //         fontWeight: 900,
-                  //       }
-                  //     : {
-                  //         width: "100%",
-                  //         textDecoration: "none",
-                  //         color: "inherit",
-                  //       }
-                  // }
+                  style={{
+                    width: "100%",
+                    textDecoration: "none",
+                  }}
                 >
                   {({ isActive }) => (
                     <ListItemButton selected={isActive}>
@@ -148,9 +183,10 @@ export function Menu({ type }: { type: "user" | "admin" }) {
         {RenderList(
           configuration
             .filter((x) => x.path !== "*")
+            .filter((x) => !x.index)
             .filter((x) => x.group === "top")
         )}
-        <NestedList />
+        {/* <NestedList /> */}
       </Box>
       <Box>
         {RenderList(
@@ -163,7 +199,7 @@ export function Menu({ type }: { type: "user" | "admin" }) {
   );
 }
 
-const toRoute = (x) => <Route {...x} />;
+const toRoute = (x) => <Route {...x}>{x.items && toRoute(x.items)}</Route>;
 
 export function Routing({ type }: { type: "user" | "admin" }) {
   switch (type) {
