@@ -1,6 +1,5 @@
+import { PageHeader } from "pages/shared/components/PageHeader";
 import { Paper } from "@mui/material";
-
-import { PageHeader } from "pages/shared/PageHeader";
 
 export default function User() {
   return (

@@ -1,4 +1,4 @@
-import { PageHeader } from "pages/shared/PageHeader";
+import { PageHeader } from "pages/shared/components/PageHeader";
 import { Paper } from "@mui/material";
 
 export default function PageNotFound() {
