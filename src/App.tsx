@@ -1,11 +1,11 @@
-import { Menu, Routing } from "pages/shared/components/Menu";
+import { Menu, Routing } from "pages/shared/components/Route/Menu";
 import { Route, Routes } from "react-router-dom";
 
 import { AuthProvinder } from "features/providers/AuthContext";
 import DialogContainer from "features/container/DialogContainer";
 import Login from "pages/shared/Login";
 import Logout from "pages/shared/Logout";
-import Main from "pages/shared/components/Main";
+import Main from "pages/shared/components/layout/Main";
 import MessagesContainer from "features/messages/MessagesContainer";
 import PageNotFound from "pages/shared/PageNotFound";
 

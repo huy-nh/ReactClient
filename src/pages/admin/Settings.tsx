@@ -11,10 +11,10 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import Drawer from "pages/shared/components/Drawer";
+import Drawer from "pages/shared/components/layout/Drawer";
 import MenuItem from "@mui/material/MenuItem";
 import MessageManager from "features/messages/MessageManager";
-import { PageHeader } from "pages/shared/components/PageHeader";
+import { PageHeader } from "pages/shared/components/Route/PageHeader";
 
 export default function Settings() {
   const defaultSettings = {

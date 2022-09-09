@@ -11,15 +11,22 @@ import {
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 
 import AdminHome from "pages/admin/AdminHome";
+import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
+import CloudIcon from "@mui/icons-material/Cloud";
 import Customer from "pages/admin/Customer";
+import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import GroupIcon from "@mui/icons-material/Group";
 import Home from "pages/user/Home";
 import HomeIcon from "@mui/icons-material/Home";
+import LanIcon from "@mui/icons-material/Lan";
 import NestedList from "./NestedMenu";
 import Settings from "pages/admin/Settings";
 import SettingsIcon from "@mui/icons-material/Settings";
+import StarIcon from "@mui/icons-material/Star";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import SyncIcon from "@mui/icons-material/Sync";
 import User from "pages/admin/User";
+import { MenuItem } from "./MenuItem";
 
 const DefaultRouteConfig: any = [
   {
@@ -37,7 +44,7 @@ const DefaultRouteConfig: any = [
     path: "quick-access",
     element: "Quick Access",
     text: "Quick Access",
-    icon: <HomeIcon />,
+    icon: <StarIcon color="warning" />,
     group: "top",
     items: [
       {
@@ -45,8 +52,18 @@ const DefaultRouteConfig: any = [
         path: "desktop",
         element: "Desktop",
         text: "Desktop",
-        icon: <HomeIcon />,
-        group: "top",
+      },
+      {
+        key: "downloads",
+        path: "downloads",
+        element: "Downloads",
+        text: "Downloads",
+      },
+      {
+        key: "Documents",
+        path: "Documents",
+        element: "Documents",
+        text: "Documents",
       },
     ],
   },
@@ -55,7 +72,7 @@ const DefaultRouteConfig: any = [
     path: "onedrive-personal",
     element: "OneDrive - Personal",
     text: "OneDrive - Personal",
-    icon: <HomeIcon />,
+    icon: <CloudIcon color="primary" />,
     group: "top",
   },
   {
@@ -63,7 +80,7 @@ const DefaultRouteConfig: any = [
     path: "this-pc",
     element: "This Pc",
     text: "This Pc",
-    icon: <HomeIcon />,
+    icon: <DesktopWindowsIcon />,
     group: "top",
   },
   {
@@ -71,7 +88,7 @@ const DefaultRouteConfig: any = [
     path: "network",
     element: "Network",
     text: "Network",
-    icon: <HomeIcon />,
+    icon: <LanIcon />,
     group: "top",
   },
   {
@@ -79,7 +96,7 @@ const DefaultRouteConfig: any = [
     path: "linux",
     element: "Linux",
     text: "Linux",
-    icon: <HomeIcon />,
+    icon: <AutoAwesomeMotionIcon />,
     group: "top",
   },
   {
@@ -87,7 +104,7 @@ const DefaultRouteConfig: any = [
     path: "admin",
     element: <Navigate to="admin" replace />,
     text: "Switch",
-    icon: <SwapHorizIcon />,
+    icon: <SyncIcon />,
     group: "bottom",
   },
 ];
@@ -139,7 +156,7 @@ const AdminRouteConfig = [
   },
 ];
 
-export function Menu({ type }: { type: "user" | "admin" }) {
+function Menu({ type }: { type: "user" | "admin" }) {
   const configuration: any =
     type === "user"
       ? DefaultRouteConfig
@@ -151,27 +168,32 @@ export function Menu({ type }: { type: "user" | "admin" }) {
     return (
       <>
         <List>
-          {configuration.map((x) => (
-            <>
-              <ListItem button disablePadding>
-                <NavLink
-                  to={x.path}
-                  style={{
-                    width: "100%",
-                    textDecoration: "none",
-                  }}
-                >
-                  {({ isActive }) => (
-                    <ListItemButton selected={isActive}>
-                      <ListItemIcon>{x.icon}</ListItemIcon>
-                      <ListItemText>{x.text}</ListItemText>
-                    </ListItemButton>
-                  )}
-                </NavLink>
-              </ListItem>
-              {x.divider && <Divider />}
-            </>
-          ))}
+          {configuration.map((x) =>
+            x.items && x.items.length > 0 ? (
+              <MenuItem text={x.text} icon={x.icon} />
+            ) : (
+              <>
+                <ListItem button disablePadding>
+                  <NavLink
+                    to={x.path}
+                    style={{
+                      width: "100%",
+                      textDecoration: "none",
+                    }}
+                  >
+                    {({ isActive }) => (
+                      <ListItemButton selected={isActive}>
+                        <ListItemIcon>{x.icon}</ListItemIcon>
+                        <ListItemText>{x.text}</ListItemText>
+                      </ListItemButton>
+                    )}
+                  </NavLink>
+                </ListItem>
+                {x.divider && <Divider />}
+              </>
+            )
+          )}
+          <MenuItem />
         </List>
       </>
     );
@@ -199,9 +221,9 @@ export function Menu({ type }: { type: "user" | "admin" }) {
   );
 }
 
-const toRoute = (x) => <Route {...x}>{x.items && toRoute(x.items)}</Route>;
+const toRoute = (x: any) => <Route {...x}>{x.items && toRoute(x.items)}</Route>;
 
-export function Routing({ type }: { type: "user" | "admin" }) {
+function Routing({ type }: { type: "user" | "admin" }) {
   switch (type) {
     case "admin":
       return AdminRouteConfig.map(toRoute);
@@ -209,3 +231,5 @@ export function Routing({ type }: { type: "user" | "admin" }) {
       return DefaultRouteConfig.map(toRoute);
   }
 }
+
+export { Menu, Routing };
