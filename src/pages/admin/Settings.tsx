@@ -11,10 +11,9 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import Drawer from "pages/shared/components/layout/Drawer";
 import MenuItem from "@mui/material/MenuItem";
 import MessageManager from "features/messages/MessageManager";
-import { PageHeader } from "pages/shared/components/Route/PageHeader";
+import { PageHeader } from "pages/shared/components/route/PageHeader";
 
 export default function Settings() {
   const defaultSettings = {
@@ -167,8 +166,6 @@ export default function Settings() {
           <FormLabel>Text</FormLabel>
           <TextField variant="filled" />
         </FormControl>
-
-        <Drawer />
       </Stack>
     </Paper>
   );

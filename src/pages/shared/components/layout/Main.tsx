@@ -10,7 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
 export default function Main({ element }) {
-  const drawerWidth = 240;
+  const drawerWidth = 300;
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />

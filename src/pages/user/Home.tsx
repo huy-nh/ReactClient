@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
-import { PageHeader } from "pages/shared/components/Route/PageHeader";
+import { PageHeader } from "pages/shared/components/route/PageHeader";
 
 function Home() {
   return (

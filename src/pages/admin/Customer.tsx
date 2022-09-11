@@ -1,7 +1,7 @@
 import { Paper, Tab, Tabs, Typography } from "@mui/material";
 
 import { Box } from "@mui/system";
-import { PageHeader } from "pages/shared/components/Route/PageHeader";
+import { PageHeader } from "pages/shared/components/route/PageHeader";
 import React from "react";
 
 function Customer() {

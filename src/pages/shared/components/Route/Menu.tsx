@@ -8,25 +8,39 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+import { NavLink, Navigate, Route } from "react-router-dom";
 
 import AdminHome from "pages/admin/AdminHome";
+import AlbumIcon from "@mui/icons-material/Album";
+import ArticleIcon from "@mui/icons-material/Article";
 import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import CloudIcon from "@mui/icons-material/Cloud";
 import Customer from "pages/admin/Customer";
 import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import GroupIcon from "@mui/icons-material/Group";
 import Home from "pages/user/Home";
 import HomeIcon from "@mui/icons-material/Home";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import LanIcon from "@mui/icons-material/Lan";
-import NestedList from "./NestedMenu";
+import { MenuItem } from "./MenuItem";
 import Settings from "pages/admin/Settings";
 import SettingsIcon from "@mui/icons-material/Settings";
 import StarIcon from "@mui/icons-material/Star";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import SyncIcon from "@mui/icons-material/Sync";
 import User from "pages/admin/User";
-import { MenuItem } from "./MenuItem";
+import WebAssetIcon from "@mui/icons-material/WebAsset";
+import { useEffect } from "react";
+
+function CreateConfigItems(text, path, icon, element) {
+  return {
+    text,
+    path: path ?? text.toString().toLowerCase(),
+    icon,
+    element,
+  };
+}
 
 const DefaultRouteConfig: any = [
   {
@@ -47,41 +61,29 @@ const DefaultRouteConfig: any = [
     icon: <StarIcon color="warning" />,
     group: "top",
     items: [
-      {
-        key: "desktop",
-        path: "desktop",
-        element: "Desktop",
-        text: "Desktop",
-      },
-      {
-        key: "downloads",
-        path: "downloads",
-        element: "Downloads",
-        text: "Downloads",
-      },
-      {
-        key: "Documents",
-        path: "Documents",
-        element: "Documents",
-        text: "Documents",
-      },
+      CreateConfigItems("Desktop", "Desktop", <WebAssetIcon />, null),
+      CreateConfigItems("Downloads", "Downloads", <FileDownloadIcon />, null),
+      CreateConfigItems("Documents", "Documents", <ArticleIcon />, null),
+      CreateConfigItems("images", "Images", <InsertPhotoIcon />, null),
     ],
   },
   {
-    key: "onedrive-personal",
-    path: "onedrive-personal",
-    element: "OneDrive - Personal",
-    text: "OneDrive - Personal",
-    icon: <CloudIcon color="primary" />,
+    ...CreateConfigItems(
+      "OneDrive - Personal",
+      "onedrive-personal",
+      <CloudIcon color="primary" />,
+      null
+    ),
     group: "top",
   },
   {
-    key: "this-pc",
-    path: "this-pc",
-    element: "This Pc",
-    text: "This Pc",
-    icon: <DesktopWindowsIcon />,
+    ...CreateConfigItems("This Pc", "this-pc", <DesktopWindowsIcon />, null),
     group: "top",
+    items: [
+      CreateConfigItems("Local Disk(C:)", "local-disk-c", <AlbumIcon />, null),
+      CreateConfigItems("Data (D:)", "data-d", <AlbumIcon />, null),
+      CreateConfigItems("Data (E:)", "data-e", <AlbumIcon />, null),
+    ],
   },
   {
     key: "network",
@@ -164,13 +166,23 @@ function Menu({ type }: { type: "user" | "admin" }) {
       ? AdminRouteConfig
       : [];
 
-  const RenderList = (configuration) => {
+  const RenderMenu = (configuration) => {
     return (
       <>
         <List>
           {configuration.map((x) =>
             x.items && x.items.length > 0 ? (
-              <MenuItem text={x.text} icon={x.icon} />
+              <NavLink to={x.path}>
+                {({ isActive }) => (
+                  <MenuItem
+                    text={x.text}
+                    icon={x.icon}
+                    items={x.items}
+                    path={x.path}
+                    open={isActive}
+                  />
+                )}
+              </NavLink>
             ) : (
               <>
                 <ListItem button disablePadding>
@@ -193,26 +205,29 @@ function Menu({ type }: { type: "user" | "admin" }) {
               </>
             )
           )}
-          <MenuItem />
         </List>
       </>
     );
   };
+  console.log("render Menu Component");
+  useEffect(() => {
+    console.log("render Menu Component");
+  }, []);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
       <Box sx={{ flexGrow: 1 }}>
-        {RenderList(
+        {RenderMenu(
           configuration
-            .filter((x) => x.path !== "*")
             .filter((x) => !x.index)
+            .filter((x) => x.path !== "*")
             .filter((x) => x.group === "top")
         )}
-        {/* <NestedList /> */}
       </Box>
       <Box>
-        {RenderList(
+        {RenderMenu(
           configuration
+            .filter((x) => !x.index)
             .filter((x) => x.path !== "*")
             .filter((x) => x.group === "bottom")
         )}

@@ -1,4 +1,4 @@
-import { Menu, Routing } from "pages/shared/components/Route/Menu";
+import { Menu, Routing } from "pages/shared/components/route/Menu";
 import { Route, Routes } from "react-router-dom";
 
 import { AuthProvinder } from "features/providers/AuthContext";
@@ -26,6 +26,20 @@ function App() {
           children={Routing({ type: "admin" })}
         />
         <Route path="page-not-found" element={<PageNotFound />} />
+        <Route path="a" element={<Main element={<Menu type="user" />} />}>
+          <Route
+            path="b"
+            element={<Main element={<Menu type="user" />} />}
+          ></Route>
+          <Route
+            path="c"
+            element={<Main element={<Menu type="user" />} />}
+          ></Route>
+          <Route
+            path="d"
+            element={<Main element={<Menu type="user" />} />}
+          ></Route>
+        </Route>
       </Routes>
       <DialogContainer />
       <MessagesContainer />
