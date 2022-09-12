@@ -10,6 +10,7 @@ import {
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function MenuItem(props) {
   const [open, setOpen] = useState<boolean>(props.open);
@@ -22,17 +23,29 @@ function MenuItem(props) {
     <>
       <ListItemButton onClick={handleClick}>
         <ListItemIcon children={props.icon} />
-        <ListItemText primary={<Box>{props.text}</Box>} />
+        <ListItemText primary={props.text} />
 
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
+
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List disablePadding>
           {props.items.map((x) => (
-            <ListItemButton sx={{ pl: 4, py: "4px" }}>
-              <ListItemIcon children={x.icon} />
-              <ListItemText primary={x.text} />
-            </ListItemButton>
+            <NavLink
+              to={x.path}
+              style={{
+                width: "100%",
+                textDecoration: "none",
+                color: "#000000de",
+              }}
+            >
+              {({ isActive }) => (
+                <ListItemButton sx={{ pl: 4, py: "4px" }} selected={isActive}>
+                  <ListItemIcon children={x.icon} />
+                  <ListItemText primary={x.text} />
+                </ListItemButton>
+              )}
+            </NavLink>
           ))}
         </List>
         <Divider />

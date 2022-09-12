@@ -1,12 +1,12 @@
 import {
   Box,
   Divider,
-  Link,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import { NavLink, Navigate, Route } from "react-router-dom";
 
@@ -23,7 +23,6 @@ import Home from "pages/user/Home";
 import HomeIcon from "@mui/icons-material/Home";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import LanIcon from "@mui/icons-material/Lan";
-import { MenuItem } from "./MenuItem";
 import Settings from "pages/admin/Settings";
 import SettingsIcon from "@mui/icons-material/Settings";
 import StarIcon from "@mui/icons-material/Star";
@@ -32,13 +31,19 @@ import SyncIcon from "@mui/icons-material/Sync";
 import User from "pages/admin/User";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
 import { useEffect } from "react";
+import { MenuItem } from "pages/shared/components/route/MenuItem";
 
 function CreateConfigItems(text, path, icon, element) {
+  const Com = icon;
   return {
     text,
     path: path ?? text.toString().toLowerCase(),
-    icon,
-    element,
+    icon: <Com color="primary" />,
+    element: (
+      <Typography variant="body1" align="right">
+        {text}
+      </Typography>
+    ),
   };
 }
 
@@ -54,24 +59,20 @@ const DefaultRouteConfig: any = [
     group: "top",
   },
   {
-    key: "quick-access",
-    path: "quick-access",
-    element: "Quick Access",
-    text: "Quick Access",
-    icon: <StarIcon color="warning" />,
+    ...CreateConfigItems("Quick Access", "quick-access", <StarIcon />, null),
     group: "top",
     items: [
-      CreateConfigItems("Desktop", "Desktop", <WebAssetIcon />, null),
-      CreateConfigItems("Downloads", "Downloads", <FileDownloadIcon />, null),
-      CreateConfigItems("Documents", "Documents", <ArticleIcon />, null),
-      CreateConfigItems("images", "Images", <InsertPhotoIcon />, null),
+      CreateConfigItems("Desktop", "desktop", <WebAssetIcon />, null),
+      CreateConfigItems("Downloads", "downloads", <FileDownloadIcon />, null),
+      CreateConfigItems("Documents", "documents", <ArticleIcon />, null),
+      CreateConfigItems("Images", "images", <InsertPhotoIcon />, null),
     ],
   },
   {
     ...CreateConfigItems(
       "OneDrive - Personal",
       "onedrive-personal",
-      <CloudIcon color="primary" />,
+      <CloudIcon />,
       null
     ),
     group: "top",
@@ -86,19 +87,11 @@ const DefaultRouteConfig: any = [
     ],
   },
   {
-    key: "network",
-    path: "network",
-    element: "Network",
-    text: "Network",
-    icon: <LanIcon />,
+    ...CreateConfigItems("Network", "network", <LanIcon />, null),
     group: "top",
   },
   {
-    key: "linux",
-    path: "linux",
-    element: "Linux",
-    text: "Linux",
-    icon: <AutoAwesomeMotionIcon />,
+    ...CreateConfigItems("Linux", "linux", <AutoAwesomeMotionIcon />, null),
     group: "top",
   },
   {
@@ -172,17 +165,12 @@ function Menu({ type }: { type: "user" | "admin" }) {
         <List>
           {configuration.map((x) =>
             x.items && x.items.length > 0 ? (
-              <NavLink to={x.path}>
-                {({ isActive }) => (
-                  <MenuItem
-                    text={x.text}
-                    icon={x.icon}
-                    items={x.items}
-                    path={x.path}
-                    open={isActive}
-                  />
-                )}
-              </NavLink>
+              <MenuItem
+                text={x.text}
+                icon={x.icon}
+                items={x.items}
+                path={x.path}
+              />
             ) : (
               <>
                 <ListItem button disablePadding>
@@ -191,6 +179,8 @@ function Menu({ type }: { type: "user" | "admin" }) {
                     style={{
                       width: "100%",
                       textDecoration: "none",
+
+                      color: "#000000de",
                     }}
                   >
                     {({ isActive }) => (
@@ -209,7 +199,7 @@ function Menu({ type }: { type: "user" | "admin" }) {
       </>
     );
   };
-  console.log("render Menu Component");
+
   useEffect(() => {
     console.log("render Menu Component");
   }, []);
@@ -236,7 +226,8 @@ function Menu({ type }: { type: "user" | "admin" }) {
   );
 }
 
-const toRoute = (x: any) => <Route {...x}>{x.items && toRoute(x.items)}</Route>;
+const toRoute = (x: any) =>
+  x.items ? x.items.map((x) => <Route {...x} />) : <Route {...x} />;
 
 function Routing({ type }: { type: "user" | "admin" }) {
   switch (type) {
