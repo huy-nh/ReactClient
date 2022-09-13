@@ -12,35 +12,50 @@ import PageNotFound from "pages/shared/PageNotFound";
 function App() {
   return (
     <AuthProvinder>
-      <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="logout" element={<Logout />} />
-        <Route
-          path=""
-          element={<Main element={<Menu type="user" />} />}
-          children={Routing({ type: "user" })}
-        />
-        <Route
-          path="admin"
-          element={<Main element={<Menu type="admin" />} />}
-          children={Routing({ type: "admin" })}
-        />
-        <Route path="page-not-found" element={<PageNotFound />} />
-        <Route path="a" element={<Main element={<Menu type="user" />} />}>
-          <Route
-            path="b"
-            element={<Main element={<Menu type="user" />} />}
-          ></Route>
-          <Route
-            path="c"
-            element={<Main element={<Menu type="user" />} />}
-          ></Route>
-          <Route
-            path="d"
-            element={<Main element={<Menu type="user" />} />}
-          ></Route>
-        </Route>
-      </Routes>
+      <Main
+        menu={
+          <Routes>
+            <Route
+              key="admin/*"
+              path="admin/*"
+              element={<Menu type="admin" />}
+            />
+            <Route key="/*" path="/*" element={<Menu type="user" />} />
+          </Routes>
+        }
+        body={
+          <Routes>
+            <Route key="login" path="login" element={<Login />} />
+            <Route key="logout" path="logout" element={<Logout />} />
+            <Route key="/" path="/" children={Routing({ type: "user" })} />
+            <Route
+              key="admin"
+              path="admin"
+              children={Routing({ type: "admin" })}
+            />
+            <Route
+              key="page-not-found"
+              path="page-not-found"
+              element={<PageNotFound />}
+            />
+            <Route key="a" path="a">
+              <Route
+                path="b"
+                element={'<Main element={<Menu type="user" />} />'}
+              ></Route>
+              <Route
+                path="c"
+                element={'<Main element={<Menu type="user" />} />'}
+              ></Route>
+              <Route
+                path="d"
+                element={'<Main element={<Menu type="user" />} />'}
+              ></Route>
+            </Route>
+          </Routes>
+        }
+      />
+
       <DialogContainer />
       <MessagesContainer />
     </AuthProvinder>

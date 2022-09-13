@@ -14,55 +14,8 @@ import { PageHeader } from "pages/shared/components/route/PageHeader";
 
 function Home() {
   return (
-    <Paper
-      elevation={3}
-      sx={{ p: 3 }}
-      // style={{ display: "flex", height: "100%" }}
-    >
-      <PageHeader
-        title="Home"
-        // subTitle="Lập Trình Sư nói: “Khi ngươi biết cách lấy mã lỗi từ đoạn code bắt lỗi, ngươi có thể xuống núi.”"
-      />
-      {/* <Button
-        variant="contained"
-        onClick={() => {
-          MessageManager.show("123");
-        }}
-      >
-        Message
-      </Button>
-
-      <Button
-        variant="contained"
-        onClick={() => {
-          MessageManager.show(
-            "Lập Trình Sư nói: “Khi ngươi biết cách lấy mã lỗi từ đoạn code bắt lỗi, ngươi có thể xuống núi.”",
-            "success"
-          );
-        }}
-      >
-        Message
-      </Button>
-
-      <Button
-        variant="contained"
-        onClick={() => {
-          DialogManager.show(ExampleDialog, {});
-        }}
-      >
-        Example
-      </Button>
-      <Button
-        variant="contained"
-        onClick={() => {
-          DialogManager.show(ConfirmDialog, {
-            title: "Title",
-            content: "Content",
-          });
-        }}
-      >
-        Confirm
-      </Button> */}
+    <Paper elevation={3} sx={{ p: 3 }}>
+      <PageHeader title="Home" />
     </Paper>
   );
 }

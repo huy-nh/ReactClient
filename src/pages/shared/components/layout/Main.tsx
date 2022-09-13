@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, Route, Routes } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -8,8 +8,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { Menu } from "../route/Menu";
 
-export default function Main({ element }) {
+export default function Main({ menu, body }) {
   const drawerWidth = 300;
   return (
     <Box sx={{ display: "flex" }}>
@@ -26,11 +27,14 @@ export default function Main({ element }) {
               color: "#d3d3d3",
               letterSpacing: 3,
             }}
-          >
-            <Typography variant="h4" style={{ letterSpacing: 18 }}>
-              Casino
-            </Typography>
-          </Link>
+            children={
+              <Typography
+                variant="h4"
+                style={{ letterSpacing: 18 }}
+                children="Casino"
+              />
+            }
+          />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -45,11 +49,11 @@ export default function Main({ element }) {
         }}
       >
         <Toolbar />
-        <Box sx={{ overflow: "auto", height: "100vh" }}>{element}</Box>
+        <Box sx={{ overflow: "auto", height: "100vh" }}>{menu}</Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Outlet />
+        {body}
       </Box>
     </Box>
   );

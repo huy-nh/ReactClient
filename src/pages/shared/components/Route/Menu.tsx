@@ -38,12 +38,8 @@ function CreateConfigItems(text, path, icon, element) {
   return {
     text,
     path: path ?? text.toString().toLowerCase(),
-    icon: <Com color="primary" />,
-    element: (
-      <Typography variant="body1" align="right">
-        {text}
-      </Typography>
-    ),
+    icon: icon,
+    element: <Typography variant="body1">{text}</Typography>,
   };
 }
 
@@ -161,48 +157,43 @@ function Menu({ type }: { type: "user" | "admin" }) {
 
   const RenderMenu = (configuration) => {
     return (
-      <>
-        <List>
-          {configuration.map((x) =>
-            x.items && x.items.length > 0 ? (
-              <MenuItem
-                text={x.text}
-                icon={x.icon}
-                items={x.items}
-                path={x.path}
-              />
-            ) : (
-              <>
-                <ListItem button disablePadding>
-                  <NavLink
-                    to={x.path}
-                    style={{
-                      width: "100%",
-                      textDecoration: "none",
+      <List key="123">
+        {configuration.map((x) =>
+          x.items && x.items.length > 0 ? (
+            <MenuItem
+              text={x.text}
+              icon={x.icon}
+              items={x.items}
+              path={x.path}
+              key={x.text}
+            />
+          ) : (
+            <>
+              <ListItem button disablePadding key={x.text}>
+                <NavLink
+                  to={x.path}
+                  style={{
+                    width: "100%",
+                    textDecoration: "none",
 
-                      color: "#000000de",
-                    }}
-                  >
-                    {({ isActive }) => (
-                      <ListItemButton selected={isActive}>
-                        <ListItemIcon>{x.icon}</ListItemIcon>
-                        <ListItemText>{x.text}</ListItemText>
-                      </ListItemButton>
-                    )}
-                  </NavLink>
-                </ListItem>
-                {x.divider && <Divider />}
-              </>
-            )
-          )}
-        </List>
-      </>
+                    color: "#000000de",
+                  }}
+                >
+                  {({ isActive }) => (
+                    <ListItemButton selected={isActive}>
+                      <ListItemIcon>{x.icon}</ListItemIcon>
+                      <ListItemText>{x.text}</ListItemText>
+                    </ListItemButton>
+                  )}
+                </NavLink>
+              </ListItem>
+              {x.divider && <Divider key={x.text + "_d"} />}
+            </>
+          )
+        )}
+      </List>
     );
   };
-
-  useEffect(() => {
-    console.log("render Menu Component");
-  }, []);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>

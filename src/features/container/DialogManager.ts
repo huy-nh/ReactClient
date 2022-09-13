@@ -20,23 +20,4 @@ export default class DialogManager {
       });
     });
   }
-
-  // static showConfirm(title, content, onPrimary) {
-  //   return new Promise((resolve) => {
-  //     const id = uniqueId();
-  //     const newProps = { ...(props || {}) };
-
-  //     newProps.onDialogClose = (result: any) => {
-  //       EventBus.publish("dialog.close", id);
-
-  //       resolve(result);
-  //     };
-
-  //     EventBus.publish("dialog.open", {
-  //       id,
-  //       component,
-  //       props: newProps,
-  //     });
-  //   });
-  // }
 }

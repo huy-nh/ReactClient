@@ -23,12 +23,9 @@ class EventBus {
       token,
     });
 
-    this.publish('eventbus.addedListener', {
+    this.publish("eventbus.addedListener", {
       listeners: this.emitter.listeners.length,
     });
-
-    console.log('EventBus - Adding listener', { component, eventName });
-    console.log('EventBus', this.subscibers);
   }
 
   unsubscribe(component: any) {

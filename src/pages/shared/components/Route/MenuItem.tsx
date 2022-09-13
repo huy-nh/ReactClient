@@ -8,12 +8,12 @@ import {
   ListItemText,
 } from "@mui/material";
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
-
+import { useMatch } from "react-router-dom";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function MenuItem(props) {
-  const [open, setOpen] = useState<boolean>(props.open);
+  const [open, setOpen] = useState<boolean>(true);
 
   const handleClick = () => {
     setOpen(!open);
@@ -32,6 +32,7 @@ function MenuItem(props) {
         <List disablePadding>
           {props.items.map((x) => (
             <NavLink
+              key={x.text}
               to={x.path}
               style={{
                 width: "100%",

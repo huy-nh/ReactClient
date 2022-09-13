@@ -72,19 +72,10 @@ export default function Settings() {
     setTextFieldsPropsCapture(defaultSettings);
   }, []);
 
-  useEffect(() => {
-    console.log("textFieldsProps", textFieldsProps);
-  }, [textFieldsProps]);
-
   const handleChange = ({ key, value }) => {
-    // console.log("setting", textFieldsProps);
     let set = textFieldsProps[key];
-    // console.log("finxd set", set);
     let newset = { ...set, value: String(value) };
-    // console.log("new set", newset);
 
-    // console.log("merged", { ...textFieldsProps, [key]: newset });
-    // MessageManager.show(`\{key: ${key}, value: ${value}\}`);
     setTextFieldsProps({ ...textFieldsProps, [key]: newset });
   };
 
@@ -110,7 +101,6 @@ export default function Settings() {
               onClick() {
                 MessageManager.show("Save Changes");
               },
-              // startIcon: <AddIcon />,
               children: "Save Changes",
             },
             {
@@ -120,7 +110,6 @@ export default function Settings() {
               onClick() {
                 setTextFieldsProps(textFieldsPropsCapture);
               },
-              // startIcon: <AddIcon />,
               children: "Cancel",
             },
           ]}
