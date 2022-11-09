@@ -23,6 +23,7 @@ import Home from "pages/user/Home";
 import HomeIcon from "@mui/icons-material/Home";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import LanIcon from "@mui/icons-material/Lan";
+import { MenuItem } from "pages/shared/components/route/MenuItem";
 import Settings from "pages/admin/Settings";
 import SettingsIcon from "@mui/icons-material/Settings";
 import StarIcon from "@mui/icons-material/Star";
@@ -31,7 +32,6 @@ import SyncIcon from "@mui/icons-material/Sync";
 import User from "pages/admin/User";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
 import { useEffect } from "react";
-import { MenuItem } from "pages/shared/components/route/MenuItem";
 
 function CreateConfigItems(text, path, icon, element) {
   const Com = icon;
@@ -157,7 +157,7 @@ function Menu({ type }: { type: "user" | "admin" }) {
 
   const RenderMenu = (configuration) => {
     return (
-      <List key="123">
+      <List>
         {configuration.map((x) =>
           x.items && x.items.length > 0 ? (
             <MenuItem
@@ -175,15 +175,23 @@ function Menu({ type }: { type: "user" | "admin" }) {
                   style={{
                     width: "100%",
                     textDecoration: "none",
-
                     color: "#000000de",
                   }}
                 >
                   {({ isActive }) => (
-                    <ListItemButton selected={isActive}>
-                      <ListItemIcon>{x.icon}</ListItemIcon>
-                      <ListItemText>{x.text}</ListItemText>
-                    </ListItemButton>
+                    <>
+                      <ListItemButton
+                        style={{
+                          background: isActive ? "#cccccc" : "inherit",
+                          borderRight: isActive
+                            ? "solid 3px #1976d2"
+                            : undefined,
+                        }}
+                      >
+                        <ListItemIcon>{x.icon}</ListItemIcon>
+                        <ListItemText>{x.text}</ListItemText>
+                      </ListItemButton>
+                    </>
                   )}
                 </NavLink>
               </ListItem>

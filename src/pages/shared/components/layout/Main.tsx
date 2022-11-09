@@ -1,17 +1,13 @@
-import * as React from "react";
-
-import { Link, Outlet, Route, Routes } from "react-router-dom";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Drawer from "@mui/material/Drawer";
+import { Link } from "react-router-dom";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Menu } from "../route/Menu";
 
 export default function Main({ menu, body }) {
-  const drawerWidth = 300;
+  const drawerWidth = 250;
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -48,13 +44,18 @@ export default function Main({ menu, body }) {
           },
         }}
       >
-        <Toolbar />
-        <Box sx={{ overflow: "auto", height: "100vh" }}>{menu}</Box>
+        <Box
+          sx={{
+            overflow: "auto",
+            paddingTop: "64px",
+            height: "100vh",
+            background: "#e3e3e3",
+          }}
+        >
+          {menu}
+        </Box>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
-        {body}
-      </Box>
+      <Box sx={{ width: "100%", paddingTop: "64px" }}>{body}</Box>
     </Box>
   );
 }

@@ -8,12 +8,22 @@ import {
   ListItemText,
 } from "@mui/material";
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
-import { useMatch } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import { NavLink } from "react-router-dom";
+import { useMatch } from "react-router-dom";
 
 function MenuItem(props) {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
+  const [matchChildren, setMatchChildren] = useState<boolean>(false);
+
+  useEffect(() => {
+    const matchItem = props?.items.some((x) => {
+      return location.pathname.includes(x.path);
+    });
+    setOpen(matchItem);
+    setMatchChildren(matchItem);
+  }, []);
 
   const handleClick = () => {
     setOpen(!open);
@@ -21,18 +31,21 @@ function MenuItem(props) {
 
   return (
     <>
-      <ListItemButton onClick={handleClick}>
+      <ListItemButton
+        onClick={handleClick}
+        style={{
+          background: matchChildren ? "#c1c1c1" : "inherit",
+          borderRight: matchChildren ? "solid 3px #1976d2" : undefined,
+        }}
+      >
         <ListItemIcon children={props.icon} />
         <ListItemText primary={props.text} />
-
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List disablePadding>
           {props.items.map((x) => (
             <NavLink
-              key={x.text}
               to={x.path}
               style={{
                 width: "100%",
@@ -41,7 +54,15 @@ function MenuItem(props) {
               }}
             >
               {({ isActive }) => (
-                <ListItemButton sx={{ pl: 4, py: "4px" }} selected={isActive}>
+                <ListItemButton
+                  sx={{ pl: 4, py: "6px" }}
+                  style={{
+                    background: isActive ? "#cccccc" : "inherit",
+                    borderRight: isActive ? "solid 3px #1976d2" : undefined,
+                  }}
+                  selected={isActive}
+                  onClick={(e) => {}}
+                >
                   <ListItemIcon children={x.icon} />
                   <ListItemText primary={x.text} />
                 </ListItemButton>

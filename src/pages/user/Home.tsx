@@ -10,13 +10,17 @@ import {
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
-import { PageHeader } from "pages/shared/components/route/PageHeader";
+import { Container } from "@mui/system";
+import PageHeader from "features/layouts/PageHerder";
 
 function Home() {
   return (
-    <Paper elevation={3} sx={{ p: 3 }}>
+    <Container>
       <PageHeader title="Home" />
-    </Paper>
+      <Paper elevation={3} sx={{ p: 3 }}>
+        Content
+      </Paper>
+    </Container>
   );
 }
 

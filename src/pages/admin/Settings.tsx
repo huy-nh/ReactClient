@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 import MenuItem from "@mui/material/MenuItem";
 import MessageManager from "features/messages/MessageManager";
-import { PageHeader } from "pages/shared/components/route/PageHeader";
+import PageHeader from "features/layouts/PageHerder";
 
 export default function Settings() {
   const defaultSettings = {

@@ -1,4 +1,4 @@
-import { PageHeader } from "pages/shared/components/route/PageHeader";
+import PageHeader from "features/layouts/PageHerder";
 import { Paper } from "@mui/material";
 
 export default function AdminHome() {
