@@ -1,5 +1,4 @@
 import {
-  Box,
   Collapse,
   Divider,
   List,
@@ -7,11 +6,10 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 
 import { NavLink } from "react-router-dom";
-import { useMatch } from "react-router-dom";
 
 function MenuItem(props) {
   const [open, setOpen] = useState<boolean>(false);
@@ -22,7 +20,6 @@ function MenuItem(props) {
       return location.pathname.includes(x.path);
     });
     setOpen(matchItem);
-    setMatchChildren(matchItem);
   }, []);
 
   const handleClick = () => {
@@ -61,9 +58,8 @@ function MenuItem(props) {
                     borderRight: isActive ? "solid 3px #1976d2" : undefined,
                   }}
                   selected={isActive}
-                  onClick={(e) => {}}
                 >
-                  <ListItemIcon children={x.icon} />
+                  <ListItemIcon color="primary" children={x.icon} />
                   <ListItemText primary={x.text} />
                 </ListItemButton>
               )}

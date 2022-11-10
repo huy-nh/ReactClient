@@ -19,11 +19,11 @@ import Customer from "pages/admin/Customer";
 import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import GroupIcon from "@mui/icons-material/Group";
-import Home from "pages/user/Home";
 import HomeIcon from "@mui/icons-material/Home";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import LanIcon from "@mui/icons-material/Lan";
 import { MenuItem } from "pages/shared/components/route/MenuItem";
+import PageHome from "pages/user/PageHome";
 import Settings from "pages/admin/Settings";
 import SettingsIcon from "@mui/icons-material/Settings";
 import StarIcon from "@mui/icons-material/Star";
@@ -48,7 +48,7 @@ const DefaultRouteConfig: any = [
     key: "index",
     index: true,
     path: "",
-    element: <Home />,
+    element: <PageHome />,
     text: "Home",
     icon: <HomeIcon />,
     divider: true,

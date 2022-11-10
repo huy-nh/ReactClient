@@ -6,14 +6,14 @@ import { Container } from "@mui/system";
 import DialogContainer from "features/container/DialogContainer";
 import Login from "pages/shared/Login";
 import Logout from "pages/shared/Logout";
-import Main from "pages/shared/components/layout/Main";
+import MainLayout from "pages/shared/components/layout/MainLayout";
 import MessagesContainer from "features/messages/MessagesContainer";
 import PageNotFound from "pages/shared/PageNotFound";
 
 function App() {
   return (
     <AuthProvinder>
-      <Main
+      <MainLayout
         menu={
           <Routes>
             <Route path="/admin/*" element={<Menu type="admin" />} />
