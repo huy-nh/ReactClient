@@ -63,7 +63,7 @@ const GridLayout = (props: any) => {
           }
 
           return (
-            <Grid xs={grids[counter++ % grids.length]} md={12} item>
+            <Grid md={grids[counter++ % grids.length]} xs={12} item>
               {node}
             </Grid>
           );
