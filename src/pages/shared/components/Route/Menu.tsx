@@ -20,9 +20,11 @@ import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import GroupIcon from "@mui/icons-material/Group";
 import HomeIcon from "@mui/icons-material/Home";
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import LanIcon from "@mui/icons-material/Lan";
 import { MenuItem } from "pages/shared/components/route/MenuItem";
+import PageForm from "pages/user/PageForm";
 import PageHome from "pages/user/PageHome";
 import Settings from "pages/admin/Settings";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -39,7 +41,7 @@ function CreateConfigItems(text, path, icon, element) {
     text,
     path: path ?? text.toString().toLowerCase(),
     icon: icon,
-    element: <Typography variant="body1">{text}</Typography>,
+    element: element ?? <Typography variant="body1">{text}</Typography>,
   };
 }
 
@@ -88,6 +90,10 @@ const DefaultRouteConfig: any = [
   },
   {
     ...CreateConfigItems("Linux", "linux", <AutoAwesomeMotionIcon />, null),
+    group: "top",
+  },
+  {
+    ...CreateConfigItems("Form", "form", <InsertDriveFileIcon />, <PageForm />),
     group: "top",
   },
   {
@@ -152,8 +158,8 @@ function Menu({ type }: { type: "user" | "admin" }) {
     type === "user"
       ? DefaultRouteConfig
       : type === "admin"
-      ? AdminRouteConfig
-      : [];
+        ? AdminRouteConfig
+        : [];
 
   const RenderMenu = (configuration) => {
     return (
