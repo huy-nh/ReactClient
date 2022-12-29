@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 
-const G = (props: GridLayoutProps) => {
+const GirdLayout = (props: GridLayoutProps) => {
     const { children, xs, md, spacing, alignItems } = props;
 
     const gridValue = typeof xs === 'number' ? [xs] :
@@ -35,4 +35,4 @@ interface GridLayoutProps {
     children?: any;
 }
 
-export { G };
+export default GirdLayout;
